@@ -1,0 +1,23 @@
+
+---
+#######
+# CONFIGURE Cluster Autoscaler
+######
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cluster-auto-scaler
+  namespace: cluster-auto-scaler
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/vasilax/ecsdemo-nodejs/
+    targetRevision: master
+    path: kubernetes/cluster-autoscaler/
+  destination:
+    server: https://5BA7CEFD72015EF16B4A72E8C5640291.sk1.us-east-1.eks.amazonaws.com
+    namespace: cluster-auto-scaler
+  syncPolicy:
+    automated:
+      prune: true 
+      selfHeal: false
